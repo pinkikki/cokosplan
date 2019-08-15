@@ -1,0 +1,25 @@
+{  
+  "template":"expense*",
+  "mappings":{  
+    "properties":{  
+      "event":{  
+        "type":"text",
+        "fields":{  
+          "keyword":{  
+            "type":"keyword",
+            "ignore_above":256
+          }
+        }
+      },
+      "max_amount":{  
+        "type":"long"
+      },
+      "min_amount":{  
+        "type":"long"
+      },
+      "payment_date":{  
+        "type":"date"
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  elasticsearch:
+    build:
+      context: ./elasticsearch
+      #   args:
+        #     - HTTP_PROXY=$HTTP_PROXY
+        #     - HTTPS_PROXY=$HTTPS_PROXY
+        #     - ES_JAVA_OPTS=-Dhttp.proxyHost= -Dhttp.proxyPort= -Dhttps.proxyHost= -Dhttps.proxyPort=
+    container_name: elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.type=single-node"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+
+  kibana:
+    image: kibana:7.2.0
+    container_name: kibana
+    links:
+      - elasticsearch:elasticsearch
+    ports:
+      - 5601:5601
+    networks:
+      - esnet
+
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  esnet:

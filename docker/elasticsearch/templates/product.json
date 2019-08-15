@@ -1,0 +1,9 @@
+{
+  "template": "*",
+  "mappings": {
+    "_meta": {
+        "product": "cokos plan",
+        "version": "0.0.1"
+    }
+  }
+}
